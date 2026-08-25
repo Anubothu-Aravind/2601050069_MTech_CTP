@@ -116,56 +116,7 @@ Here are the test scenarios designed to verify system correctness:
 * **Expected Sorted List**: `[("StudentA", 90), ("StudentB", 90)]` (preserving original relative order)
 
 ## 8. Driver Logic (Main)
-```python
-def run_scholarship_program(students, threshold):
-    print("\nInitial Student Database:", students)
-    
-    sorted_students = merge_sort_students(students)
-    print("\nStudents Sorted in Descending Order of Marks:")
-    for name, mark in sorted_students:
-        print(f"  - {name}: {mark}")
-
-    scholarship_recipients = [student for student in sorted_students if student[1] >= threshold]
-    
-    print(f"\nScholarship Recipients (Marks >= {threshold}):")
-    if scholarship_recipients:
-        for name, mark in scholarship_recipients:
-            print(f"  * {name} ({mark}) - ELIGIBLE")
-    else:
-        print("  None of the students are eligible for a scholarship.")
-
-def interactive_mode():
-    try:
-        threshold_input = input("Enter scholarship eligibility marks threshold [default: 90]: ").strip()
-        threshold = int(threshold_input) if threshold_input else 90
-    except Exception:
-        threshold = 90
-
-    try:
-        count_input = input("Enter number of custom students to add [default: 0 to skip to preset database]: ").strip()
-        count = int(count_input) if count_input else 0
-    except Exception:
-        count = 0
-
-    students = []
-    if count > 0:
-        print(f"Please enter {count} student name and marks:")
-        for index in range(count):
-            try:
-                name = input(f"  Student {index+1} Name: ").strip()
-                marks = int(input(f"  Student {index+1} Marks: ").strip())
-                students.append((name, marks))
-            except Exception:
-                print("Invalid inputs, using default preset list instead.")
-                students = students_database.copy()
-                break
-    else:
-        students = students_database.copy()
-
-    run_scholarship_program(students, threshold)
-
-interactive_mode()
-```
+To run the driver logic, open the [MergeSort.ipynb](MergeSort.ipynb) notebook and execute the cells.
 
 ## Sample Input and Output
 

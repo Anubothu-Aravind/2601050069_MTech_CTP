@@ -106,38 +106,7 @@ Here are the test scenarios designed to verify system correctness:
 * **Expected Output**: Book 10 found at index 9 (Position 10)
 
 ## 8. Driver Logic (Main)
-```python
-def interactive_mode():
-    """
-    Main driver logic that prompts for dynamic input to search for a book.
-    """
-    try:
-        n_input = input("Enter the total number of books in the library [default: 1000000]: ").strip()
-        N = int(n_input) if n_input else 1000000
-        
-        if N < 0:
-            print("Error: Number of books cannot be negative.")
-            return
-            
-        print(f"Generating sorted library of {N} books (IDs 1 to {N})...")
-        books = list(range(1, N + 1))
-        
-        target_input = input(f"Enter the book ID to search for (1 to {N}) [default: 750000]: ").strip()
-        target = int(target_input) if target_input else 750000
-        
-        print(f"Searching for book {target} using Binary Search...")
-        index = binary_search_books(books, target)
-        
-        if index != -1:
-            print(f"SUCCESS: Book {target} found at index {index} (Position {index + 1} in the sorted list).")
-        else:
-            print(f"NOT FOUND: Book {target} is not in the library database.")
-            
-    except ValueError:
-        print("Invalid input! Please enter integer values.")
-
-interactive_mode()
-```
+To run the driver logic, open the [BinarySearch.ipynb](BinarySearch.ipynb) notebook and execute the cells.
 
 ## Sample Input and Output
 
