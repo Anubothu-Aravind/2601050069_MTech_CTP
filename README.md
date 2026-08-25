@@ -18,7 +18,8 @@ The project directory is structured as follows:
 │       │   ├── BinarySearch.ipynb      # Notebook implementing Book Search
 │       │   └── readme.md               # Book Search project documentation
 │       └── MergeSort/
-│           └── readme.md               # Merge Sort project documentation
+│           ├── MergeSort.ipynb         # Notebook implementing Scholarship Selection
+│           └── readme.md               # Scholarship Selection project documentation
 ├── CO2/                                # Course Outcome 2: Placeholder
 │   └── readme.md                       # CO2 overview
 ├── CO3/                                # Course Outcome 3: Placeholder
@@ -40,7 +41,7 @@ Below is a consolidated list of Course Outcomes, their associated topics, projec
 | Project | Focus / Algorithm | Problem Statement | Status | Link |
 | :--- | :--- | :--- | :--- | :--- |
 | **University Library Book Search** | Binary Search | Search for a book ID `750000` in a sorted database of `1,000,000` books or return "Not Found". | Completed | [Project Readme](./CO1/DivideAndConquer/BinarySearch/readme.md) |
-| **Array Sorting** | Merge Sort | Sort an unsorted array of $N$ elements in ascending order. | Completed | [Project Readme](./CO1/DivideAndConquer/MergeSort/readme.md) |
+| **Student Scholarship Eligibility System** | Merge Sort | Sort student records in descending order of marks and select students eligible for scholarship ($\ge 90$). | Completed | [Project Readme](./CO1/DivideAndConquer/MergeSort/readme.md) |
 
 ### Course Outcomes 2 to 6 (CO2–CO6) - Upcoming Modules
 

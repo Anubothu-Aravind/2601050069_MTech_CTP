@@ -1,84 +1,193 @@
-# Merge Sort
+# Project: Student Scholarship Eligibility System (Merge Sort)
 
-A classic sorting algorithm that utilizes the Divide and Conquer paradigm to sort an array.
+An implementation of a stable Merge Sort algorithm in descending order to sort student marks and determine scholarship recipients.
 
-## Introduction
-Merge Sort is a sorting algorithm based on the Divide and Conquer paradigm. It works by recursively dividing the unsorted list into $N$ sublists, each containing one element (a list of one element is considered sorted), and then repeatedly merging sublists to produce new sorted sublists until there is only one sublist remaining.
+## 1. Problem Statement
+Given a database of students with their names and marks:
+* Anitha: 95
+* Vivek: 83
+* Laksmi: 67
+* Teja: 97
+* Kumar: 85
 
-## Why/Where it is Used
-Merge Sort is popular because it guarantees a worst-case time complexity of $O(N \log N)$ and is a stable sort. It is used in:
-- Sorting linked lists (since it doesn't require random access memory).
-- External sorting (when the dataset is too large to fit in RAM and must be sorted from external storage like hard drives).
-- E-commerce applications where stability is important (retaining the original relative order of items with equal keys).
+Sort the list of students in **descending order** of their marks using the **Merge Sort** algorithm, and select the students who are eligible for a scholarship (eligibility threshold: marks $\ge 90$).
 
-## Problem Statement
-Given an unsorted array of $N$ elements, sort it in ascending order.
+## 2. Divide into Parts/Modules
+To keep the design clean and modular, the notebook is structured into these logical parts/modules:
+* **Core Logic**: A stable Merge Sort implementation modified to sort student tuples `(name, marks)` in descending order of marks.
+* **Data Store & Input Setup**: Sets up the student database list and scholarship criteria threshold.
+* **Sample Edge Cases (Test Cases)**: Conceptual descriptions of tests to verify the sorting logic under different conditions.
+* **Driver Logic (Main)**: The interactive console driver that executes the sorting, filters eligible students, and accepts dynamic custom user inputs.
 
-## Abstraction
-Merge Sort abstracts sorting by breaking down a large, complex sorting problem into smaller, trivial subproblems (sorting lists of size 1) and then combining the sorted parts. The core abstraction lies in the `merge` function, which takes two sorted sublists and combines them into a single sorted list.
+## 3. Abstraction
+Abstraction helps focus on essential parameters and hide unnecessary information.
 
-## Edge Cases
-- **Empty Array**: The array contains no elements (returns empty array).
-- **Single Element**: The array contains one element (already sorted).
-- **Already Sorted**: The array is already in ascending order.
-- **Reverse Sorted**: The array is in descending order.
-- **Duplicate Elements**: The array contains multiple occurrences of identical elements (Merge Sort preserves their relative order due to stability).
+### Needs (Essential Information)
+- **Student Database**: A list of `(name, marks)` tuples.
+- **Scholarship threshold**: The minimum marks required (90).
+- **Split and Merge Indexes**: Boundaries (`left`, `right`, `mid`) to track division of subproblems.
 
-## Algorithm/Steps
-1. If the array length is 1 or less, return the array (base case).
-2. Divide the unsorted array into two halves at the midpoint: `mid = len(arr) // 2`.
-3. Recursively apply Merge Sort to the left half and the right half.
-4. Merge the two sorted halves back into a single sorted array by comparing elements pointer-by-pointer.
+### No Needs (Irrelevant Information)
+- Student demographic details (roll numbers, address, contact details).
+- Enrollment and attendance info.
+- Scholarship financial specifics (funding source, award amount).
 
-## Complexity
-- **Time Complexity**:
-  - **Best Case**: $O(N \log N)$
-  - **Average Case**: $O(N \log N)$
-  - **Worst Case**: $O(N \log N)$
-- **Space Complexity**: $O(N)$ (requires auxiliary space to store the divided subarrays during the merge process).
+## 4. Algorithm
+1. **Divide**: If the list length is $\le 1$, return it (base case). Otherwise, divide the list into two halves at the midpoint: `mid = len(arr) // 2`.
+2. **Conquer**: Recursively apply Merge Sort to the left half and right half.
+3. **Combine (Merge)**: Merge the two sorted halves back into a single sorted list in descending order:
+   - Compare elements at the pointers of both halves.
+   - If the marks of the student in the left half are greater than or equal to the marks of the student in the right half, insert the left student into the temporary list (preserving stability). Otherwise, insert the right student.
+   - Copy any remaining students from either half.
+4. **Scholarship Filtering**: Traverse the sorted list and select students with `marks >= 90`.
 
-## Python Implementation
+## 5. Core Logic
 ```python
-def merge_sort(arr):
-    if len(arr) > 1:
-        mid = len(arr) // 2
-        left_half = arr[:mid]
-        right_half = arr[mid:]
+def merge_sort_students(arr):
+    if len(arr) <= 1:
+        return arr
 
-        # Recursive calls
-        merge_sort(left_half)
-        merge_sort(right_half)
+    mid = len(arr) // 2
+    left_half = arr[:mid]
+    right_half = arr[mid:]
 
-        # Merge step
-        i = j = k = 0
+    # Recursive divide and conquer
+    left_sorted = merge_sort_students(left_half)
+    right_sorted = merge_sort_students(right_half)
 
-        # Copy data to temp arrays
-        while i < len(left_half) and j < len(right_half):
-            if left_half[i] < right_half[j]:
-                arr[k] = left_half[i]
-                i += 1
-            else:
-                arr[k] = right_half[j]
-                j += 1
-            k += 1
+    # Merge step (descending order comparison)
+    merged = []
+    i = j = 0
 
-        # Checking if any element was left
-        while i < len(left_half):
-            arr[k] = left_half[i]
+    while i < len(left_sorted) and j < len(right_sorted):
+        # Stable sort: left element comes first if marks are equal
+        if left_sorted[i][1] >= right_sorted[j][1]:
+            merged.append(left_sorted[i])
             i += 1
-            k += 1
-
-        while j < len(right_half):
-            arr[k] = right_half[j]
+        else:
+            merged.append(right_sorted[j])
             j += 1
-            k += 1
+
+    # Append remaining elements
+    merged.extend(left_sorted[i:])
+    merged.extend(right_sorted[j:])
+
+    return merged
 ```
 
-## Sample Input/Output
-### Sample 1
-- **Input**: `[12, 11, 13, 5, 6, 7]`
-- **Output**: `[5, 6, 7, 11, 12, 13]`
+## 6. Data Store & Input Setup
+```python
+students_database = [
+    ("Anitha", 95),
+    ("Vivek", 83),
+    ("Laksmi", 67),
+    ("Teja", 97),
+    ("Kumar", 85)
+]
 
-### Sample 2
-- **Input**: `[5, 2, 9, 1, 5, 6]`
-- **Output**: `[1, 2, 5, 5, 6, 9]`
+scholarship_threshold = 90
+```
+
+## 7. Sample Edge Cases (Test Cases)
+Here are the test scenarios designed to verify system correctness:
+
+### Test Case 1: Standard Student List (Provided Example)
+* **Input**: `[("Anitha", 95), ("Vivek", 83), ("Laksmi", 67), ("Teja", 97), ("Kumar", 85)]`
+* **Expected Sorted List**: `[("Teja", 97), ("Anitha", 95), ("Kumar", 85), ("Vivek", 83), ("Laksmi", 67)]`
+* **Expected Scholarship Recipients**: `[("Teja", 97), ("Anitha", 95)]`
+
+### Test Case 2: Empty Student List
+* **Input**: `[]`
+* **Expected Sorted List**: `[]`
+* **Expected Scholarship Recipients**: `[]`
+
+### Test Case 3: Single Student List
+* **Input**: `[("Anitha", 95)]`
+* **Expected Sorted List**: `[("Anitha", 95)]`
+* **Expected Scholarship Recipients**: `[("Anitha", 95)]`
+
+### Test Case 4: None Eligible for Scholarship
+* **Input**: `[("Vivek", 83), ("Laksmi", 67)]`
+* **Expected Sorted List**: `[("Vivek", 83), ("Laksmi", 67)]`
+* **Expected Scholarship Recipients**: `[]`
+
+### Test Case 5: Identical Marks (Stability Verification)
+* **Input**: `[("StudentA", 90), ("StudentB", 90)]`
+* **Expected Sorted List**: `[("StudentA", 90), ("StudentB", 90)]` (preserving original relative order)
+
+## 8. Driver Logic (Main)
+```python
+def run_scholarship_program(students, threshold):
+    print("\nInitial Student Database:", students)
+    
+    sorted_students = merge_sort_students(students)
+    print("\nStudents Sorted in Descending Order of Marks:")
+    for name, mark in sorted_students:
+        print(f"  - {name}: {mark}")
+
+    scholarship_recipients = [student for student in sorted_students if student[1] >= threshold]
+    
+    print(f"\nScholarship Recipients (Marks >= {threshold}):")
+    if scholarship_recipients:
+        for name, mark in scholarship_recipients:
+            print(f"  * {name} ({mark}) - ELIGIBLE")
+    else:
+        print("  None of the students are eligible for a scholarship.")
+
+def interactive_mode():
+    try:
+        threshold_input = input("Enter scholarship eligibility marks threshold [default: 90]: ").strip()
+        threshold = int(threshold_input) if threshold_input else 90
+    except Exception:
+        threshold = 90
+
+    try:
+        count_input = input("Enter number of custom students to add [default: 0 to skip to preset database]: ").strip()
+        count = int(count_input) if count_input else 0
+    except Exception:
+        count = 0
+
+    students = []
+    if count > 0:
+        print(f"Please enter {count} student name and marks:")
+        for index in range(count):
+            try:
+                name = input(f"  Student {index+1} Name: ").strip()
+                marks = int(input(f"  Student {index+1} Marks: ").strip())
+                students.append((name, marks))
+            except Exception:
+                print("Invalid inputs, using default preset list instead.")
+                students = students_database.copy()
+                break
+    else:
+        students = students_database.copy()
+
+    run_scholarship_program(students, threshold)
+
+interactive_mode()
+```
+
+## Sample Input and Output
+
+### Interactive Output (Sample Run)
+```text
+=============================================
+        DYNAMIC INPUT / INTERACTIVE MODE
+=============================================
+Enter scholarship eligibility marks threshold [default: 90]: 90
+Enter number of custom students to add [default: 0 to skip to preset database]: 0
+
+Initial Student Database: [('Anitha', 95), ('Vivek', 83), ('Laksmi', 67), ('Teja', 97), ('Kumar', 85)]
+
+Students Sorted in Descending Order of Marks:
+  - Teja: 97
+  - Anitha: 95
+  - Kumar: 85
+  - Vivek: 83
+  - Laksmi: 67
+
+Scholarship Recipients (Marks >= 90):
+  * Teja (97) - ELIGIBLE
+  * Anitha (95) - ELIGIBLE
+=============================================
+```

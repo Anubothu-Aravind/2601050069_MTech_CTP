@@ -17,4 +17,4 @@ Each algorithmic topic under CO1 is implemented as a practical project based on 
 | Project Name | Algorithm | Problem Statement | Documentation Link |
 | :--- | :--- | :--- | :--- |
 | **University Library Book Search** | Binary Search | Search for a book ID `750000` in a sorted list of `1,000,000` books (IDs 1 to 10 lakhs) or return "Not Found". | [Project Readme](./DivideAndConquer/BinarySearch/readme.md) |
-| **Array Sorting** | Merge Sort | Sort an unsorted array of $N$ elements in ascending order. | [Project Readme](./DivideAndConquer/MergeSort/readme.md) |
+| **Student Scholarship Eligibility System** | Merge Sort | Sort student records in descending order of marks and select students eligible for scholarship ($\ge 90$). | [Project Readme](./DivideAndConquer/MergeSort/readme.md) |
