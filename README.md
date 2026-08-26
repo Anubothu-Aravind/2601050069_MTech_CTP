@@ -23,9 +23,12 @@ The project directory is structured as follows:
 │   ├── ShoppingCart/
 │   │   ├── ShoppingCart.ipynb          # Notebook implementing Shopping Cart
 │   │   └── readme.md                   # Shopping Cart project documentation
-│   └── AttendanceAnalyzer/
-│       ├── AttendanceAnalyzer.ipynb    # Notebook implementing Attendance Analyzer
-│       └── readme.md                   # Attendance Analyzer project documentation
+│   ├── AttendanceAnalyzer/
+│   │   ├── AttendanceAnalyzer.ipynb    # Notebook implementing Attendance Analyzer
+│   │   └── readme.md                   # Attendance Analyzer project documentation
+│   └── ParkingSystem/
+│       ├── ParkingSystem.ipynb         # Notebook implementing Parking Lot Management System
+│       └── readme.md                   # Parking Lot Management System project documentation
 ├── CO2/                                # Course Outcome 2: Placeholder
 │   └── readme.md                       # CO2 overview
 ├── CO3/                                # Course Outcome 3: Placeholder
@@ -50,6 +53,7 @@ Below is a consolidated list of Course Outcomes, their associated topics, projec
 | **Student Scholarship Eligibility System** | Merge Sort | Sort student records in descending order of marks and select students eligible for scholarship ($\ge 90$). | Completed | [Project Readme](./CO1/DivideAndConquer/MergeSort/readme.md) |
 | **Online Shopping Cart System** | Procedural Programming | Design a system to add/remove products, change quantity, apply discounts, calculate subtotal, calculate GST, and compute the total bill. | Completed | [Project Readme](./CO1/ShoppingCart/readme.md) |
 | **Student Attendance Analysis System** | Procedural Programming | Design a program to analyze student attendance, calculate percentages, flag low attendance (< 75%), find the highest attendance, and calculate overall class attendance. | Completed | [Project Readme](./CO1/AttendanceAnalyzer/readme.md) |
+| **Parking Lot Management System** | Procedural Programming | Design a system to manage 100 parking slots, track occupancy, allocate and release slots, and compute parking charges based on hours stay. | Completed | [Project Readme](./CO1/ParkingSystem/readme.md) |
 
 ### Course Outcomes 2 to 6 (CO2–CO6) - Upcoming Modules
 

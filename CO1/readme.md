@@ -20,4 +20,5 @@ Each algorithmic topic under CO1 is implemented as a practical project based on 
 | **Student Scholarship Eligibility System** | Merge Sort | Sort student records in descending order of marks and select students eligible for scholarship ($\ge 90$). | [Project Readme](./DivideAndConquer/MergeSort/readme.md) |
 | **Online Shopping Cart System** | Procedural Programming | Design a system to add/remove products, change quantity, apply discounts, calculate subtotal, calculate GST, and compute the total bill. | [Project Readme](./ShoppingCart/readme.md) |
 | **Student Attendance Analysis System** | Procedural Programming | Design a program to analyze student attendance, calculate percentages, flag low attendance (< 75%), find the highest attendance, and calculate overall class attendance. | [Project Readme](./AttendanceAnalyzer/readme.md) |
+| **Parking Lot Management System** | Procedural Programming | Design a system to manage 100 parking slots, track occupancy, allocate and release slots, and compute parking charges based on hours stay. | [Project Readme](./ParkingSystem/readme.md) |
 
