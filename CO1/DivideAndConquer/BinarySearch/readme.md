@@ -36,28 +36,30 @@ Abstraction helps focus on essential parameters and hide unnecessary information
 3. If the loop terminates without finding the target, return `-1` (Not Found).
 
 ## 5. Core Logic
-```python
-def binary_search_books(books, target_id):
+```text
+FUNCTION binary_search_books(books, target_id)
     low = 0
-    high = len(books) - 1
+    high = length of books - 1
     
-    while low <= high:
-        mid = low + (high - low) // 2
-        if books[mid] == target_id:
-            return mid
-        elif books[mid] < target_id:
+    WHILE low <= high DO
+        mid = low + (high - low) / 2
+        IF books[mid] equals target_id THEN
+            RETURN mid
+        ELSE IF books[mid] < target_id THEN
             low = mid + 1
-        else:
+        ELSE
             high = mid - 1
-            
-    return -1
+        END IF
+    END WHILE
+    
+    RETURN -1
+END FUNCTION
 ```
 
 ## 6. Data Store & Input Setup
-```python
-# Simulating 1,000,000 sorted books (IDs from 1 to 1,000,000)
-books_database = list(range(1, 1000001))
-default_target = 750000
+```text
+BOOKS_DATABASE = Array of integers from 1 to 1000000
+DEFAULT_TARGET = 750000
 ```
 
 ## 7. Sample Edge Cases (Test Cases)

@@ -42,6 +42,7 @@ Below is a consolidated list of Course Outcomes, their associated topics, projec
 | :--- | :--- | :--- | :--- | :--- |
 | **University Library Book Search** | Binary Search | Search for a book ID `750000` in a sorted database of `1,000,000` books or return "Not Found". | Completed | [Project Readme](./CO1/DivideAndConquer/BinarySearch/readme.md) |
 | **Student Scholarship Eligibility System** | Merge Sort | Sort student records in descending order of marks and select students eligible for scholarship ($\ge 90$). | Completed | [Project Readme](./CO1/DivideAndConquer/MergeSort/readme.md) |
+| **Online Shopping Cart System** | Procedural Programming | Design a system to add/remove products, change quantity, apply discounts, calculate subtotal, calculate GST, and compute the total bill. | Completed | [Project Readme](./CO1/ShoppingCart/readme.md) |
 
 ### Course Outcomes 2 to 6 (CO2–CO6) - Upcoming Modules
 

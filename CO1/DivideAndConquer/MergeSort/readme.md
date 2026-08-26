@@ -42,42 +42,43 @@ Abstraction helps focus on essential parameters and hide unnecessary information
 4. **Scholarship Filtering**: Traverse the sorted list and select students with `marks >= 90`.
 
 ## 5. Core Logic
-```python
-def merge_sort_students(arr):
-    if len(arr) <= 1:
-        return arr
+```text
+FUNCTION merge_sort_students(arr)
+    IF length of arr <= 1 THEN
+        RETURN arr
+    END IF
 
-    mid = len(arr) // 2
-    left_half = arr[:mid]
-    right_half = arr[mid:]
+    mid = length of arr / 2
+    left_half = sub-array of arr from index 0 to mid
+    right_half = sub-array of arr from index mid to end
 
-    # Recursive divide and conquer
     left_sorted = merge_sort_students(left_half)
     right_sorted = merge_sort_students(right_half)
 
-    # Merge step (descending order comparison)
-    merged = []
-    i = j = 0
+    merged = Empty List
+    i = 0
+    j = 0
 
-    while i < len(left_sorted) and j < len(right_sorted):
-        # Stable sort: left element comes first if marks are equal
-        if left_sorted[i][1] >= right_sorted[j][1]:
-            merged.append(left_sorted[i])
-            i += 1
-        else:
-            merged.append(right_sorted[j])
-            j += 1
+    WHILE i < length of left_sorted AND j < length of right_sorted DO
+        IF left_sorted[i].marks >= right_sorted[j].marks THEN
+            APPEND left_sorted[i] TO merged
+            i = i + 1
+        ELSE
+            APPEND right_sorted[j] TO merged
+            j = j + 1
+        END IF
+    END WHILE
 
-    # Append remaining elements
-    merged.extend(left_sorted[i:])
-    merged.extend(right_sorted[j:])
+    APPEND remaining elements of left_sorted to merged
+    APPEND remaining elements of right_sorted to merged
 
-    return merged
+    RETURN merged
+END FUNCTION
 ```
 
 ## 6. Data Store & Input Setup
-```python
-students_database = [
+```text
+STUDENTS_DATABASE = [
     ("Anitha", 95),
     ("Vivek", 83),
     ("Laksmi", 67),
@@ -85,7 +86,7 @@ students_database = [
     ("Kumar", 85)
 ]
 
-scholarship_threshold = 90
+SCHOLARSHIP_THRESHOLD = 90
 ```
 
 ## 7. Sample Edge Cases (Test Cases)
