@@ -19,3 +19,5 @@ Each algorithmic topic under CO1 is implemented as a practical project based on 
 | **University Library Book Search** | Binary Search | Search for a book ID `750000` in a sorted list of `1,000,000` books (IDs 1 to 10 lakhs) or return "Not Found". | [Project Readme](./DivideAndConquer/BinarySearch/readme.md) |
 | **Student Scholarship Eligibility System** | Merge Sort | Sort student records in descending order of marks and select students eligible for scholarship ($\ge 90$). | [Project Readme](./DivideAndConquer/MergeSort/readme.md) |
 | **Online Shopping Cart System** | Procedural Programming | Design a system to add/remove products, change quantity, apply discounts, calculate subtotal, calculate GST, and compute the total bill. | [Project Readme](./ShoppingCart/readme.md) |
+| **Student Attendance Analysis System** | Procedural Programming | Design a program to analyze student attendance, calculate percentages, flag low attendance (< 75%), find the highest attendance, and calculate overall class attendance. | [Project Readme](./AttendanceAnalyzer/readme.md) |
+

@@ -11,15 +11,21 @@ The project directory is structured as follows:
 ```text
 2601050069_MTech_CTP/
 ├── README.md                           # Root documentation and repository overview
-├── CO1/                                # Course Outcome 1: Divide and Conquer
+├── CO1/                                # Course Outcome 1: Divide and Conquer / Programming
 │   ├── readme.md                       # CO1 overview and learning objectives
-│   └── DivideAndConquer/
-│       ├── BinarySearch/
-│       │   ├── BinarySearch.ipynb      # Notebook implementing Book Search
-│       │   └── readme.md               # Book Search project documentation
-│       └── MergeSort/
-│           ├── MergeSort.ipynb         # Notebook implementing Scholarship Selection
-│           └── readme.md               # Scholarship Selection project documentation
+│   ├── DivideAndConquer/
+│   │   ├── BinarySearch/
+│   │   │   ├── BinarySearch.ipynb      # Notebook implementing Book Search
+│   │   │   └── readme.md               # Book Search project documentation
+│   │   └── MergeSort/
+│   │       ├── MergeSort.ipynb         # Notebook implementing Scholarship Selection
+│   │       └── readme.md               # Scholarship Selection project documentation
+│   ├── ShoppingCart/
+│   │   ├── ShoppingCart.ipynb          # Notebook implementing Shopping Cart
+│   │   └── readme.md                   # Shopping Cart project documentation
+│   └── AttendanceAnalyzer/
+│       ├── AttendanceAnalyzer.ipynb    # Notebook implementing Attendance Analyzer
+│       └── readme.md                   # Attendance Analyzer project documentation
 ├── CO2/                                # Course Outcome 2: Placeholder
 │   └── readme.md                       # CO2 overview
 ├── CO3/                                # Course Outcome 3: Placeholder
@@ -43,6 +49,7 @@ Below is a consolidated list of Course Outcomes, their associated topics, projec
 | **University Library Book Search** | Binary Search | Search for a book ID `750000` in a sorted database of `1,000,000` books or return "Not Found". | Completed | [Project Readme](./CO1/DivideAndConquer/BinarySearch/readme.md) |
 | **Student Scholarship Eligibility System** | Merge Sort | Sort student records in descending order of marks and select students eligible for scholarship ($\ge 90$). | Completed | [Project Readme](./CO1/DivideAndConquer/MergeSort/readme.md) |
 | **Online Shopping Cart System** | Procedural Programming | Design a system to add/remove products, change quantity, apply discounts, calculate subtotal, calculate GST, and compute the total bill. | Completed | [Project Readme](./CO1/ShoppingCart/readme.md) |
+| **Student Attendance Analysis System** | Procedural Programming | Design a program to analyze student attendance, calculate percentages, flag low attendance (< 75%), find the highest attendance, and calculate overall class attendance. | Completed | [Project Readme](./CO1/AttendanceAnalyzer/readme.md) |
 
 ### Course Outcomes 2 to 6 (CO2–CO6) - Upcoming Modules
 
