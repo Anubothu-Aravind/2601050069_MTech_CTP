@@ -29,10 +29,11 @@ Abstraction helps focus on essential parameters and hide unnecessary information
 
 ## 4. Algorithm
 1. Initialize a dictionary `parking_lot` representing 100 slots, all mapped to `None`.
-2. Display a menu loop with 5 options (Allocate Slot, Release Slot, View Availability, Show Status/Metrics, Exit).
+2. Display a menu loop that automatically prints the parking lot status (either showing all slots are available, or listing unavailable/occupied slots if any exist) at the start of each iteration, followed by 5 options (Allocate Slot, Release Slot, View Availability, Show Status/Metrics, Exit).
 3. On allocating a slot:
-   - Check if the parking lot is full.
-   - If not full, locate the lowest-numbered vacant slot, record the vehicle number, and print the allocated slot.
+   - Prompt for the slot number (1-100) and the vehicle plate number.
+   - Check if the slot number is valid and currently vacant.
+   - If vacant, record the vehicle number and print the allocated slot. If invalid or occupied, print appropriate error.
 4. On releasing a slot:
    - Prompt for slot number. Check if valid and currently occupied.
    - Prompt for hours parked, calculate charges (using hourly rate, rounding up to the nearest hour), clear the slot, and print invoice.
@@ -43,15 +44,16 @@ Abstraction helps focus on essential parameters and hide unnecessary information
 
 ## 5. Core Logic
 ```python
-def allocate_slot(parking_lot, vehicle_number):
+def allocate_slot(parking_lot, slot_number, vehicle_number):
+    if not (1 <= slot_number <= 100):
+        raise ValueError("Invalid slot number. Must be between 1 and 100.")
     vehicle_number = vehicle_number.strip()
     if not vehicle_number:
         raise ValueError("Vehicle number cannot be empty.")
-    for slot in range(1, 101):
-        if parking_lot[slot] is None:
-            parking_lot[slot] = vehicle_number
-            return slot
-    return None
+    if parking_lot[slot_number] is not None:
+        raise ValueError(f"Slot {slot_number} is already occupied.")
+    parking_lot[slot_number] = vehicle_number
+    return slot_number
 
 def release_slot(parking_lot, slot_number):
     if not (1 <= slot_number <= 100):
@@ -111,6 +113,11 @@ To run the driver logic, open the [ParkingSystem.ipynb](ParkingSystem.ipynb) not
 
 ### Interactive Dynamic Input Output (Sample Run)
 ```text
+---------------------------------------------
+PARKING LOT STATUS
+---------------------------------------------
+All slots are available.
+---------------------------------------------
 --- PARKING LOT MENU ---
 1. Allocate Parking Slot
 2. Release Parking Slot
@@ -122,8 +129,38 @@ Enter choice (1-5): 4
 PARKING LOT OCCUPANCY STATUS
 ---------------------------------------------
 Total Slots:      100
-Occupied Slots:   3
-Available Slots:  97
+Occupied Slots:   0
+Available Slots:  100
 Status:           Available (Not Full)
 ---------------------------------------------
+
+---------------------------------------------
+PARKING LOT STATUS
+---------------------------------------------
+All slots are available.
+---------------------------------------------
+--- PARKING LOT MENU ---
+1. Allocate Parking Slot
+2. Release Parking Slot
+3. View Available Slots
+4. Show Occupancy Status
+5. Exit
+Enter choice (1-5): 1
+Enter Slot Number to allocate (1-100): 5
+Enter Vehicle Plate Number: KA-01-AA-9999
+Slot 5 has been successfully allocated to KA-01-AA-9999.
+
+---------------------------------------------
+PARKING LOT STATUS
+---------------------------------------------
+Unavailable (Occupied) Slots: 5
+---------------------------------------------
+--- PARKING LOT MENU ---
+1. Allocate Parking Slot
+2. Release Parking Slot
+3. View Available Slots
+4. Show Occupancy Status
+5. Exit
+Enter choice (1-5): 5
+Exiting Parking Lot System. Goodbye!
 ```
