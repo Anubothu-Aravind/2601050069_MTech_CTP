@@ -30,11 +30,12 @@ Abstraction helps focus on essential parameters and hide unnecessary information
 ## 4. Algorithm
 1. Initialize `student_db` by loading the default database of 40 students or importing from a CSV file.
 2. Accept choice input from the user (1-7):
+   - Note: At the start of every loop iteration, the system displays the available branches, student count per branch, and grand total of students.
    - **Option 1 (Add Student Record)**: Prompt for Name, Stream, Conducted classes, and Attended classes. Validate inputs (Name and Stream not empty, Conducted $> 0$, $0 \le \text{Attended} \le \text{Conducted}$). Store the record.
    - **Option 2 (View Attendance Report)**: Optionally filter by stream. Compute and print the attendance report of students in a formatted table displaying Name, Stream, Conducted, Attended, Percentage, and Status.
    - **Option 3 (Identify Low Attendance)**: Optionally filter by stream. Print students whose attendance percentage is $< 75.0\%$.
    - **Option 4 (Find Highest Attendance)**: Optionally filter by stream. Find the maximum attendance percentage and list all students matching that value (handling ties).
-   - **Option 5 (Calculate Overall Metrics)**: Optionally filter by stream. Calculate the average of individual percentages, and the overall aggregate attendance rate ($\frac{\sum \text{Attended}}{\sum \text{Conducted}} \times 100$) for the filtered group.
+   - **Option 5 (Calculate Overall Metrics)**: Optionally filter by stream. If no filter is provided (user presses Enter), calculate and display the metrics stream-wise for every stream in the database (sorted by student count descending, then alphabetically), followed by the overall metrics for all streams combined. If a stream filter is provided, calculate and display metrics (Number of Students, Class Average Percentage, and Aggregate Attendance Rate) for only that specific stream.
    - **Option 6 (Load Student Records from CSV)**: Re-initialize `student_db` from a CSV path. Validate column headers (supporting `name`, `stream`, `conducted`, and `attended`) and individual row records.
    - **Option 7 (Exit)**: Terminate the program.
 
@@ -176,6 +177,17 @@ To run the driver logic, open the [AttendanceAnalyzer.ipynb](AttendanceAnalyzer.
 
 ### Interactive Dynamic Input Output (Sample Run)
 ```text
+---------------------------------------------
+AVAILABLE BRANCHES & STUDENT COUNTS
+---------------------------------------------
+AIML           : 10 student(s)
+CSE            : 10 student(s)
+DS             : 10 student(s)
+ECE            : 10 student(s)
+---------------------------------------------
+Grand Total    : 40 student(s)
+---------------------------------------------
+
 --- STUDENT ATTENDANCE MENU ---
 1. Add Student Record
 2. View Attendance Report
@@ -184,20 +196,71 @@ To run the driver logic, open the [AttendanceAnalyzer.ipynb](AttendanceAnalyzer.
 5. Calculate Overall Class Attendance
 6. Load Student Records from CSV
 7. Exit
-Enter choice (1-7): 2
-Enter stream to filter by (or press Enter for all): CSE
----------------------------------------------------------------------------
-Student Name         Stream     Conducted  Attended   Percentage   Status    
----------------------------------------------------------------------------
-Aarav                CSE        40         35         87.50%       Good      
-Ananya               CSE        40         38         95.00%       Good      
-Arjun                CSE        40         29         72.50%       Low (<75%)
-Bhavya               CSE        45         41         91.11%       Good      
-Charan               CSE        45         32         71.11%       Low (<75%)
-Deepika              CSE        50         45         90.00%       Good      
-Gautham              CSE        50         36         72.00%       Low (<75%)
-Harini               CSE        40         27         67.50%       Low (<75%)
-Ishaan               CSE        45         40         88.89%       Good      
-Kavya                CSE        50         48         96.00%       Good      
----------------------------------------------------------------------------
+Enter choice (1-7): 5
+Enter stream to filter by (or press Enter for all): 
+---------------------------------------------
+OVERALL CLASS ATTENDANCE METRICS
+---------------------------------------------
+
+AIML
+---------------------------------------------
+Number of Students:            10
+Class Average Percentage:      80.48%
+Aggregate Attendance Rate:     80.66%
+
+CSE
+---------------------------------------------
+Number of Students:            10
+Class Average Percentage:      83.16%
+Aggregate Attendance Rate:     83.37%
+
+DS
+---------------------------------------------
+Number of Students:            10
+Class Average Percentage:      82.94%
+Aggregate Attendance Rate:     82.70%
+
+ECE
+---------------------------------------------
+Number of Students:            10
+Class Average Percentage:      81.17%
+Aggregate Attendance Rate:     80.67%
+
+---------------------------------------------
+ALL STREAMS
+---------------------------------------------
+Number of Students:            40
+Class Average Percentage:      81.94%
+Aggregate Attendance Rate:     81.84%
+---------------------------------------------
+---------------------------------------------
+AVAILABLE BRANCHES & STUDENT COUNTS
+---------------------------------------------
+AIML           : 10 student(s)
+CSE            : 10 student(s)
+DS             : 10 student(s)
+ECE            : 10 student(s)
+---------------------------------------------
+Grand Total    : 40 student(s)
+---------------------------------------------
+
+--- STUDENT ATTENDANCE MENU ---
+1. Add Student Record
+2. View Attendance Report
+3. Find Students Below 75% (Low Attendance)
+4. Find Student(s) with Highest Attendance
+5. Calculate Overall Class Attendance
+6. Load Student Records from CSV
+7. Exit
+Enter choice (1-7): 5
+Enter stream to filter by (or press Enter for all): ds
+---------------------------------------------
+OVERALL CLASS ATTENDANCE METRICS
+---------------------------------------------
+Stream: DS
+---------------------------------------------
+Number of Students:            10
+Class Average Percentage:      82.94%
+Aggregate Attendance Rate:     82.70%
+---------------------------------------------
 ```
