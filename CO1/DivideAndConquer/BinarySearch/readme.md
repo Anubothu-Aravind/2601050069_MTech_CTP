@@ -36,30 +36,29 @@ Abstraction helps focus on essential parameters and hide unnecessary information
 3. If the loop terminates without finding the target, return `-1` (Not Found).
 
 ## 5. Core Logic
-```text
-FUNCTION binary_search_books(books, target_id)
+```python
+def binary_search_books(books, target_id):
     low = 0
-    high = length of books - 1
+    high = len(books) - 1
     
-    WHILE low <= high DO
-        mid = low + (high - low) / 2
-        IF books[mid] equals target_id THEN
-            RETURN mid
-        ELSE IF books[mid] < target_id THEN
+    while low <= high:
+        mid = low + (high - low) // 2
+        if books[mid] == target_id:
+            return mid
+        elif books[mid] < target_id:
             low = mid + 1
-        ELSE
+        else:
             high = mid - 1
-        END IF
-    END WHILE
-    
-    RETURN -1
-END FUNCTION
+            
+    return -1
 ```
 
 ## 6. Data Store & Input Setup
-```text
-BOOKS_DATABASE = Array of integers from 1 to 1000000
-DEFAULT_TARGET = 750000
+```python
+# Generates a sorted list of book IDs from 1 to N
+N = 1000000
+books = list(range(1, N + 1))
+default_target = 750000
 ```
 
 ## 7. Sample Edge Cases (Test Cases)
@@ -115,13 +114,22 @@ To run the driver logic, open the [BinarySearch.ipynb](BinarySearch.ipynb) noteb
 ### Interactive Dynamic Input Output (Sample Run)
 ```text
 =============================================
-        DYNAMIC INPUT / INTERACTIVE MODE
+        University Library
 =============================================
-Enter the total number of books in the library [default: 1000000]: 1000000
-Generating sorted library of 1000000 books (IDs 1 to 1000000)...
-Enter the book ID to search for (1 to 1000000) [default: 750000]: 750000
-Searching for book 750000 using Binary Search...
 
-SUCCESS: Book 750000 found at index 749999 (Position 750000 in the sorted list).
+Enter number of books [default: 10,00,000]: 3000
+
+Enter Book ID to search [default: 7,50,000]: 23
+
 =============================================
+        University Library - Search Results
+=============================================
+SUCCESS: Book 23 found!
+Index: 22
+Position: 23
+=============================================
+
+Do you want to search another book? (yes/no): no
+
+Thank you for using the University Library!
 ```

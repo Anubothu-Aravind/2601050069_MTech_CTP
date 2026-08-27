@@ -8,7 +8,7 @@ A retail store needs a python-based online shopping cart system. The system shou
 ## 2. Divide into Parts/Modules
 To keep the design clean and modular, the notebook is structured into these logical parts/modules:
 * **Core Logic**: Clean, decoupled functions for cart manipulation (`add_product`, `remove_product`, `change_quantity`).
-* **Computational Logic**: Functions for calculations (`calculate_subtotal`, `calculate_discount`, `calculate_gst`).
+* **Computational Logic**: Functions for calculations (`calculate_subtotal`, `calculate_discount`, `calculate_gst`, and `print_receipt`).
 * **Data Store & Input Setup**: Defines product inventory maps and category-specific GST tax rates.
 * **Driver Logic (Main)**: An interactive console menu loop that drives the shopping operations.
 
@@ -39,75 +39,101 @@ Abstraction helps focus on essential parameters and hide unnecessary information
    - Option 8 (Exit): Terminate program.
 
 ## 5. Core Logic
-```text
-FUNCTION add_product(cart, product_id, quantity)
-    IF quantity <= 0 THEN
-        RAISE ValueError
-    END IF
-    cart[product_id] = cart[product_id] + quantity (default to 0 if not present)
-END FUNCTION
+```python
+def add_product(cart, product_id, quantity):
+    if quantity <= 0:
+        raise ValueError()
+    cart[product_id] = cart.get(product_id, 0) + quantity
 
-FUNCTION remove_product(cart, product_id)
-    IF product_id NOT IN cart THEN
-        RAISE KeyError
-    END IF
-    REMOVE product_id FROM cart
-END FUNCTION
+def remove_product(cart, product_id):
+    if product_id not in cart:
+        raise KeyError()
+    del cart[product_id]
 
-FUNCTION change_quantity(cart, product_id, quantity)
-    IF product_id NOT IN cart THEN
-        RAISE KeyError
-    END IF
-    IF quantity <= 0 THEN
-        RAISE ValueError
-    END IF
+def change_quantity(cart, product_id, quantity):
+    if product_id not in cart:
+        raise KeyError()
+    if quantity <= 0:
+        raise ValueError()
     cart[product_id] = quantity
-END FUNCTION
 
-FUNCTION calculate_subtotal(cart, inventory)
+def calculate_subtotal(cart, inventory):
     subtotal = 0.0
-    FOR EACH (product_id, quantity) IN cart
-        price = inventory[product_id].price
-        subtotal = subtotal + (price * quantity)
-    END FOR
-    RETURN subtotal
-END FUNCTION
+    for pid, qty in cart.items():
+        subtotal += inventory[pid]["price"] * qty
+    return subtotal
 
-FUNCTION calculate_discount(subtotal, discount_percent, discount_flat)
-    percent_discount_value = subtotal * (discount_percent / 100.0)
-    total_discount = percent_discount_value + discount_flat
-    RETURN MIN(total_discount, subtotal)
-END FUNCTION
+def calculate_discount(subtotal, discount_percent, discount_flat):
+    pct_disc = subtotal * (discount_percent / 100.0)
+    total_disc = pct_disc + discount_flat
+    return min(total_disc, subtotal)
 
-FUNCTION calculate_gst(cart, inventory, discount_ratio, gst_rates, default_rate)
+def calculate_gst(cart, inventory, discount_ratio, gst_rates, default_rate=0.18):
     total_gst = 0.0
-    FOR EACH (product_id, quantity) IN cart
-        item_subtotal = inventory[product_id].price * quantity
-        item_discounted_price = item_subtotal * discount_ratio
-        category = inventory[product_id].category
-        rate = gst_rates[category] (or default_rate if category not present)
-        total_gst = total_gst + (item_discounted_price * rate)
-    END FOR
-    RETURN total_gst
-END FUNCTION
+    for pid, qty in cart.items():
+        item_sub = inventory[pid]["price"] * qty
+        item_disc = item_sub * discount_ratio
+        category = inventory[pid]["category"]
+        rate = gst_rates.get(category, default_rate)
+        total_gst += item_disc * rate
+    return total_gst
+
+def print_receipt(cart, inventory, discount_percent, discount_flat, gst_rates, default_rate=0.18):
+    subtotal = calculate_subtotal(cart, inventory)
+    disc_val = calculate_discount(subtotal, discount_percent, discount_flat)
+    discount_ratio = (subtotal - disc_val) / subtotal if subtotal > 0 else 0.0
+    gst_val = calculate_gst(cart, inventory, discount_ratio, gst_rates, default_rate)
+    grand_total = subtotal - disc_val + gst_val
+    
+    print("=" * 75)
+    print("                   ONLINE SHOPPING CART INVOICE                    ")
+    print("=" * 75)
+    print(f"{'ID':<6} {'Product Name':<20} {'Qty':<4} {'Price':<8} {'Subtotal':<10} {'GST':<8} {'Total':<10}")
+    print("-" * 75)
+    
+    for pid, qty in cart.items():
+        price = inventory[pid]["price"]
+        item_sub = price * qty
+        item_net = item_sub * discount_ratio
+        rate = gst_rates.get(inventory[pid]["category"], default_rate)
+        item_gst = item_net * rate
+        item_tot = item_net + item_gst
+        name = inventory[pid]["name"]
+        print(f"{pid:<6} {name:<20} {qty:<4} ${price:<7.2f} ${item_sub:<9.2f} ${item_gst:<7.2f} ${item_tot:<9.2f}")
+        
+    print("-" * 75)
+    print(f"{'Subtotal:':<63} ${subtotal:.2f}")
+    if disc_val > 0:
+        disc_label = f"Discount ({discount_percent}% off + ${discount_flat:.2f} flat):"
+        print(f"{disc_label:<63} -${disc_val:.2f}")
+    print(f"{'GST Total:':<63} ${gst_val:.2f}")
+    print("-" * 75)
+    print(f"{'GRAND TOTAL:':<63} ${grand_total:.2f}")
+    print("=" * 75)
+    print("                 Thank you for shopping with us!                 ")
+    print("=" * 75)
 ```
 
 ## 6. Data Store & Input Setup
-```text
-INVENTORY = {
-    "P001": {name: "Laptop", price: 1200.00, category: "Electronics"},
-    "P002": {name: "Headphones", price: 150.00, category: "Electronics"},
-    "P003": {name: "Winter Jacket", price: 80.00, category: "Clothing"},
-    "P004": {name: "Algorithmic Book", price: 45.00, category: "Books"},
-    "P005": {name: "Organic Apples", price: 12.00, category: "Groceries"}
+```python
+inventory = {
+    "P001": {"name": "Laptop", "price": 1200.00, "category": "Electronics"},
+    "P002": {"name": "Headphones", "price": 150.00, "category": "Electronics"},
+    "P003": {"name": "Winter Jacket", "price": 80.00, "category": "Clothing"},
+    "P004": {"name": "Algorithmic Book", "price": 45.00, "category": "Books"},
+    "P005": {"name": "Organic Apples", "price": 12.00, "category": "Groceries"}
 }
 
-GST_RATES = {
+gst_rates = {
     "Electronics": 0.18,
     "Clothing": 0.12,
     "Groceries": 0.05,
     "Books": 0.00
 }
+
+cart = {}
+discount_percent = 10.0
+discount_flat = 15.0
 ```
 
 ## 7. Sample Edge Cases (Test Cases)
@@ -155,15 +181,15 @@ Enter choice (1-8): 7
 ===========================================================================
 ID     Product Name         Qty  Price    Subtotal   GST      Total     
 ---------------------------------------------------------------------------
-P001   Laptop               1    $1200.00 $1200.00   $191.80  $1257.06  
-P002   Headphones           1    $150.00  $150.00    $23.97   $157.13   
-P005   Organic Apples       5    $12.00   $60.00     $2.66    $62.86    
+P001   Laptop               1    $1200.00 $1200.00   $192.10  $1259.34  
+P002   Headphones           1    $150.00  $150.00    $24.01   $157.42   
+P005   Organic Apples       5    $12.00   $60.00     $2.67    $56.03    
 ---------------------------------------------------------------------------
 Subtotal:                                                       $1410.00
 Discount (10.0% off + $15.00 flat):                             -$156.00
-GST Total:                                                      $218.44
+GST Total:                                                      $218.78
 ---------------------------------------------------------------------------
-GRAND TOTAL:                                                    $1472.44
+GRAND TOTAL:                                                    $1472.78
 ===========================================================================
                  Thank you for shopping with us!                 
 ===========================================================================

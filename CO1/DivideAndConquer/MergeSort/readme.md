@@ -42,43 +42,37 @@ Abstraction helps focus on essential parameters and hide unnecessary information
 4. **Scholarship Filtering**: Traverse the sorted list and select students with `marks >= 90`.
 
 ## 5. Core Logic
-```text
-FUNCTION merge_sort_students(arr)
-    IF length of arr <= 1 THEN
-        RETURN arr
-    END IF
+```python
+def merge_sort_students(arr):
+    if len(arr) <= 1:
+        return arr
 
-    mid = length of arr / 2
-    left_half = sub-array of arr from index 0 to mid
-    right_half = sub-array of arr from index mid to end
-
+    mid = len(arr) // 2
+    left_half = arr[:mid]
+    right_half = arr[mid:]
+    
     left_sorted = merge_sort_students(left_half)
     right_sorted = merge_sort_students(right_half)
+    merged = []
+    i = j = 0
 
-    merged = Empty List
-    i = 0
-    j = 0
+    while i < len(left_sorted) and j < len(right_sorted):
+        if left_sorted[i][1] >= right_sorted[j][1]:
+            merged.append(left_sorted[i])
+            i += 1
+        else:
+            merged.append(right_sorted[j])
+            j += 1
 
-    WHILE i < length of left_sorted AND j < length of right_sorted DO
-        IF left_sorted[i].marks >= right_sorted[j].marks THEN
-            APPEND left_sorted[i] TO merged
-            i = i + 1
-        ELSE
-            APPEND right_sorted[j] TO merged
-            j = j + 1
-        END IF
-    END WHILE
+    merged.extend(left_sorted[i:])
+    merged.extend(right_sorted[j:])
 
-    APPEND remaining elements of left_sorted to merged
-    APPEND remaining elements of right_sorted to merged
-
-    RETURN merged
-END FUNCTION
+    return merged
 ```
 
 ## 6. Data Store & Input Setup
-```text
-STUDENTS_DATABASE = [
+```python
+students_database = [
     ("Anitha", 95),
     ("Vivek", 83),
     ("Laksmi", 67),
@@ -86,7 +80,7 @@ STUDENTS_DATABASE = [
     ("Kumar", 85)
 ]
 
-SCHOLARSHIP_THRESHOLD = 90
+scholarship_threshold = 90
 ```
 
 ## 7. Sample Edge Cases (Test Cases)
@@ -124,10 +118,16 @@ To run the driver logic, open the [MergeSort.ipynb](MergeSort.ipynb) notebook an
 ### Interactive Output (Sample Run)
 ```text
 =============================================
-        DYNAMIC INPUT / INTERACTIVE MODE
+        Merge Sort - Data
 =============================================
-Enter scholarship eligibility marks threshold [default: 90]: 90
-Enter number of custom students to add [default: 0 to skip to preset database]: 0
+Scholarship Threshold: 90
+Students in Database:
+  - Anitha: 95
+  - Vivek: 83
+  - Laksmi: 67
+  - Teja: 97
+  - Kumar: 85
+=============================================
 
 Initial Student Database: [('Anitha', 95), ('Vivek', 83), ('Laksmi', 67), ('Teja', 97), ('Kumar', 85)]
 
@@ -141,5 +141,4 @@ Students Sorted in Descending Order of Marks:
 Scholarship Recipients (Marks >= 90):
   * Teja (97) - ELIGIBLE
   * Anitha (95) - ELIGIBLE
-=============================================
 ```
