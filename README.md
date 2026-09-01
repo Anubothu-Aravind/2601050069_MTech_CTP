@@ -37,8 +37,23 @@ The project directory is structured as follows:
 │   └── readme.md                       # CO4 overview
 ├── CO5/                                # Course Outcome 5: Placeholder
 │   └── readme.md                       # CO5 overview
-└── CO6/                                # Course Outcome 6: Placeholder
-    └── readme.md                       # CO6 overview
+├── CO6/                                # Course Outcome 6: Placeholder
+│   └── readme.md                       # CO6 overview
+└── MID_PREP/                           # Mid-Exam preparation area organized by CO
+    ├── CO1/
+    │   ├── C01.pdf                     # Mid-exam preparation material for CO1
+    │   ├── readme.md                   # CO1 Mid Prep overview & index
+    │   ├── a_ComputationalThinking/    # Section A: Decomposition, Abstraction & Pattern Recognition
+    │   ├── b_AlgorithmDesignAndComplexity/ # Section B: Algorithm Design & Complexity
+    │   │   └── b2_SocialMediaFollowers/ # b.2 Social Media Followers Search Comparison
+    │   ├── c_DivideAndConquer/         # Section C: Divide and Conquer
+    │   ├── d_DynamicProgramming/       # Section D: Dynamic Programming
+    │   ├── e_GreedyAlgorithms/         # Section E: Greedy Algorithms
+    │   └── f_Backtracking/             # Section F: Backtracking
+    ├── CO2/
+    │   └── CO2.pdf                     # Mid-exam preparation material for CO2
+    └── CO3/
+        └── CO3.pdf                     # Mid-exam preparation material for CO3
 ```
 
 ## Course Outcomes & Projects Portfolio
@@ -54,6 +69,7 @@ Below is a consolidated list of Course Outcomes, their associated topics, projec
 | **Online Shopping Cart System** | Procedural Programming | Design a system to add/remove products, change quantity, apply discounts, calculate subtotal, calculate GST, and compute the total bill. | Completed | [Project Readme](./CO1/ShoppingCart/readme.md) |
 | **Student Attendance Analysis System** | Procedural Programming | Design a program to analyze student attendance, calculate percentages, flag low attendance (< 75%), find the highest attendance, and calculate overall class attendance. | Completed | [Project Readme](./CO1/AttendanceAnalyzer/readme.md) |
 | **Parking Lot Management System** | Procedural Programming | Design a system to manage 100 parking slots, track occupancy, allocate and release slots, and compute parking charges based on hours stay. | Completed | [Project Readme](./CO1/ParkingSystem/readme.md) |
+| **Social Media Followers Verification** | Linear Search vs Separate Chaining Hash | Verify username existence in a follower list of $n=500,000$ comparing $O(n)$ Linear Search vs $O(1)$ Hash Lookup with separate chaining. | Completed | [Project Readme](./MID_PREP/CO1/b_AlgorithmDesignAndComplexity/b2_SocialMediaFollowers/readme.md) |
 
 ### Course Outcomes 2 to 6 (CO2–CO6) - Upcoming Modules
 
@@ -67,5 +83,6 @@ Below is a consolidated list of Course Outcomes, their associated topics, projec
 
 ## Organization of Work
 1. **Course Outcomes (`COx/`)**: Each module is organized inside its respective directory, detailing specific curriculum targets.
-2. **Algorithm Subfolders**: Complex design paradigms under a Course Outcome (such as `CO1/DivideAndConquer/`) are grouped in thematic subdirectories.
-3. **Structured Documentation**: Every algorithm subfolder has a dedicated `readme.md` detailing the problem statement, abstraction, step-by-step algorithm, complexity analysis, and implementation details.
+2. **Mid-Exam Preparation (`MID_PREP/`)**: A dedicated preparation area organized by Course Outcome (CO1–CO3 currently available) containing PDF preparation materials for mid-term examinations.
+3. **Algorithm Subfolders**: Complex design paradigms under a Course Outcome (such as `CO1/DivideAndConquer/`) are grouped in thematic subdirectories.
+4. **Structured Documentation**: Every algorithm subfolder has a dedicated `readme.md` detailing the problem statement, abstraction, step-by-step algorithm, complexity analysis, and implementation details.
