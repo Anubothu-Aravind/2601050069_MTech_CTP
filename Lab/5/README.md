@@ -1,66 +1,79 @@
-# List-Based vs Generator-Based Processing
+# Banking Management System
 
 ## Objective
 
-Compare list-based and generator-based processing for a large dataset in terms of execution time and memory usage.
+Design and implement a robust Banking Management System demonstrating Object-Oriented Programming (OOP) principles in Python, including:
+- Abstraction
+- Inheritance
+- Polymorphism
+- Encapsulation
+- Dataclasses and Type Hints
+
+## Problem Statement
+
+A banking institution requires an automated account management system to handle customer accounts, deposits, withdrawals, balance checks, and account statements. The system must support different account types (such as Savings Accounts with minimum balance rules and Current Accounts with overdraft allowances) while enforcing strict input validation and domain constraints.
+
+## Architecture & Class Hierarchy
+
+1. **`Account` (Abstract Base Class)**: Defines the common interface and shared properties (account number, account holder name, balance).
+2. **`SavingsAccount`**: Inherits from `Account`, enforces a minimum balance requirement, and calculates periodic interest.
+3. **`CurrentAccount`**: Inherits from `Account`, allows an overdraft limit for business transactions.
+4. **`Bank`**: Aggregates and manages multiple accounts, supporting account opening, funds transfer between accounts, and account lookups.
 
 ## Algorithm
 
-### List-Based Processing
+### Deposit Operation
+1. Accept account number and deposit amount.
+2. Verify amount is strictly positive ($> 0$).
+3. Add amount to current balance and log transaction.
+4. Return updated balance.
 
-1. Create a large list containing the dataset.
-2. Process all elements and store the results in another list.
-3. Measure execution time.
-4. Measure peak memory usage.
+### Withdrawal Operation
+1. Accept account number and withdrawal amount.
+2. Verify amount is strictly positive ($> 0$).
+3. Check balance constraints:
+   - For `SavingsAccount`: ensure `balance - amount >= minimum_balance`.
+   - For `CurrentAccount`: ensure `balance - amount >= -overdraft_limit`.
+4. Deduct amount, log transaction, and return updated balance.
 
-### Generator-Based Processing
+## Python Program
 
-1. Create a generator that produces one value at a time.
-2. Process values as they are generated.
-3. Measure execution time.
-4. Measure peak memory usage.
-5. Compare the results with list-based processing.
+The complete implementation and interactive demonstration is available in:
 
-## Program
+`Banking_Management_System.ipynb`
 
-The Python implementation is provided in:
+## Sample Output
 
-`List_vs_Generator_Processing.ipynb`
+```text
+==================================================
+           BANKING MANAGEMENT SYSTEM
+==================================================
+Created Savings Account: SB1001 for Aravind (Initial: Rs. 15,000.00)
+Created Current Account: CA2001 for TechCorp (Initial: Rs. 50,000.00)
 
-## Comparison
+[Deposit] SB1001 deposited Rs. 5,000.00. New Balance: Rs. 20,000.00
+[Withdraw] SB1001 withdrew Rs. 8,000.00. New Balance: Rs. 12,000.00
+[Transfer] Transferred Rs. 5,000.00 from SB1001 to CA2001.
 
-| Feature | List | Generator |
+Account Statement for SB1001:
+- Holder: Aravind
+- Type: Savings Account (Min Balance: Rs. 1,000.00)
+- Available Balance: Rs. 7,000.00
+==================================================
+```
+
+## Time and Space Complexity
+
+| Operation | Time Complexity | Space Complexity |
 |---|---|---|
-| Data storage | Stores all elements | Produces elements one at a time |
-| Memory usage | High | Low |
-| Processing | Eager | Lazy |
-| Random access | Supported | Not directly supported |
-| Large datasets | Requires more memory | Memory efficient |
+| Account Creation | $O(1)$ | $O(1)$ |
+| Deposit / Withdrawal | $O(1)$ | $O(1)$ |
+| Funds Transfer | $O(1)$ | $O(1)$ |
+| Account Lookup | $O(1)$ (Hash Map) | $O(1)$ |
+| Total Storage ($N$ accounts) | — | $O(N)$ |
 
-## Complexity
+## How to Run
 
-For `N` elements:
-
-### List-Based Processing
-
-- Time Complexity: **O(N)**
-- Space Complexity: **O(N)**
-
-### Generator-Based Processing
-
-- Time Complexity: **O(N)**
-- Extra Space Complexity: **O(1)**
-
-## Expected Observation
-
-The exact execution time and memory usage depend on the computer running the program.
-
-Generally:
-
-- List-based processing uses significantly more memory because the data and results are stored in memory.
-- Generator-based processing uses much less memory because values are produced one at a time.
-- Generator processing can have some execution overhead, but it is very useful for large datasets.
-
-## Conclusion
-
-Lists are useful when the complete dataset must be stored and accessed multiple times. Generators are more memory efficient and are suitable for processing large datasets sequentially or streaming data.
+1. Open `Banking_Management_System.ipynb` in Jupyter Notebook or JupyterLab.
+2. Select a Python 3 kernel.
+3. Run all cells to verify class implementations, polymorphic behaviors, and test scenarios.

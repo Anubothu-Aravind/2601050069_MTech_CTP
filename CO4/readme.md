@@ -1,12 +1,13 @@
-# Course Outcome 4 (CO4)
-
-This directory is designated for topics and programs related to Course Outcome 4.
+# Course Outcome 4 (CO4) — Functional Patterns & Concurrency
 
 ## Overview
-This section will cover the algorithmic paradigms and problem-solving techniques assigned to Course Outcome 4 in the curriculum.
+Functional programming: pure functions, higher-order functions, immutability,
+map/filter/reduce, partial application; asyncio event loops, coroutines, async/await;
+producer-consumer, futures; GIL; CPU-bound vs I/O-bound.
 
-## Objectives / Topics
-*Upcoming course modules.*
+## Projects
 
-## Covered Algorithms & Folders
-*No subdirectories or implementation files are currently present in this folder.*
+| # | Topic | File |
+|---|-------|------|
+| 1 | Asyncio Concurrent Fetcher | [Lab 12](../Lab/12/README.md) |
+| 2 | Functional Patterns Demo | [CO4/Functional_Concurrency.ipynb](./Functional_Concurrency.ipynb) |

@@ -1,12 +1,13 @@
-# Course Outcome 6 (CO6)
-
-This directory is designated for topics and programs related to Course Outcome 6.
+# Course Outcome 6 (CO6) — AI-Pair Programming Engineering
 
 ## Overview
-This section will cover the algorithmic paradigms and problem-solving techniques assigned to Course Outcome 6 in the curriculum.
+Engineering with AI as force multiplier: effective prompting; context management;
+specification-first development; code review of AI output; refactoring to project
+conventions; type-driven & test-first development with AI; tool selection (Claude Code,
+Cursor, Copilot, Continue.dev); honest disclosure of AI assistance.
 
-## Objectives / Topics
-*Upcoming course modules.*
+## Projects
 
-## Covered Algorithms & Folders
-*No subdirectories or implementation files are currently present in this folder.*
+| # | Topic | File |
+|---|-------|------|
+| 1 | Sudoku Generator & Solver (~3000 LOC) | [CO6 Project](./Sudoku_AI_Postmortem.ipynb) |

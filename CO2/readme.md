@@ -1,12 +1,13 @@
-# Course Outcome 2 (CO2)
-
-This directory is designated for topics and programs related to Course Outcome 2.
+# Course Outcome 2 (CO2) — Pythonic Programming & Data Structures
 
 ## Overview
-This section will cover the algorithmic paradigms and problem-solving techniques assigned to Course Outcome 2 in the curriculum.
+Python data model: sequences, mappings, sets; comprehensions; generators & iterators;
+context managers; decorators; `collections`, `itertools`, `functools`, `heapq`, `bisect`.
 
-## Objectives / Topics
-*Upcoming course modules.*
+## Projects
 
-## Covered Algorithms & Folders
-*No subdirectories or implementation files are currently present in this folder.*
+| # | Topic | File |
+|---|-------|------|
+| 1 | Stack & Queue (Type Hints + Dataclasses) | [Lab 3](../Lab/3/README.md) |
+| 2 | List vs Generator Processing | [Lab 4](../Lab/4/README.md) |
+| 3 | Trie with Autocomplete | [Lab 10](../Lab/10/README.md) |

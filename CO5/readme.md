@@ -1,12 +1,13 @@
-# Course Outcome 5 (CO5)
-
-This directory is designated for topics and programs related to Course Outcome 5.
+# Course Outcome 5 (CO5) — Software Quality Engineering
 
 ## Overview
-This section will cover the algorithmic paradigms and problem-solving techniques assigned to Course Outcome 5 in the curriculum.
+Testing pyramid: unit, integration, E2E; Pytest (fixtures, parametrize, marks);
+Hypothesis property-based testing; mocking; coverage; mypy strict; ruff; black;
+pre-commit hooks; GitHub Actions CI/CD; Docker basics.
 
-## Objectives / Topics
-*Upcoming course modules.*
+## Projects
 
-## Covered Algorithms & Folders
-*No subdirectories or implementation files are currently present in this folder.*
+| # | Topic | File |
+|---|-------|------|
+| 1 | Pytest + Hypothesis Testing Suite | [Lab 13](../Lab/13/README.md) |
+| 2 | Quality Engineering Demo | [CO5/Quality_Engineering.ipynb](./Quality_Engineering.ipynb) |
